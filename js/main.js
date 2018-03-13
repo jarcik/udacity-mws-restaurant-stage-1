@@ -125,9 +125,11 @@ resetRestaurants = (restaurants) => {
  * Create all restaurants HTML and add them to the webpage.
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
-  const ul = document.getElementById('restaurants-list');
+  const div = document.getElementById('restaurants-list');
+  var tabi = 3;
   restaurants.forEach(restaurant => {
-    ul.append(createRestaurantHTML(restaurant));
+    div.append(createRestaurantHTML(restaurant, tabi));
+    tabi++;
   });
   addMarkersToMap();
 }
@@ -135,32 +137,44 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Create restaurant HTML.
  */
-createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
+createRestaurantHTML = (restaurant, tabindex) => {
+  const div = document.createElement('div');
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  li.append(image);
+  image.alt = DBHelper.imageAltText(restaurant);
+  div.append(image);
 
+  const div2 = document.createElement('div');
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
-  li.append(name);
+  div2.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
+  div2.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
-  li.append(address);
+  div2.append(address);
 
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  var role = document.createAttribute('role');
+  role.value = 'button';
+  more.setAttributeNode(role);  
+  var tabi = document.createAttribute('tabindex');
+  tabi.value = tabindex.toString();
+  more.setAttributeNode(tabi);  
+  var label = document.createAttribute('aria-label');
+  label.value = 'detail for ' + restaurant.name + ' restaurant';
+  more.setAttributeNode(label); 
+  div2.append(more)
 
-  return li
+  div.append(div2);
+  return div
 }
 
 /**
