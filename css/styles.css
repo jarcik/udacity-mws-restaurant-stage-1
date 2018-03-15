@@ -82,6 +82,7 @@ nav h1 a {
     font-size: 17px;
     margin: 0;
     width: calc(100% - 80px);
+    text-align: left;
 }
 
 /* Display list items side by side */
@@ -243,7 +244,7 @@ nav h1 a {
   border-bottom: 1px solid #d9d9d9;
   border-top: 1px solid #fff;
 }
-#reviews-container h2 {
+#reviews-container h3 {
   color: #f58500;
   font-size: 24pt;
   font-weight: 300;
@@ -261,7 +262,7 @@ nav h1 a {
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
-  padding: 0 20px 20px;
+  padding: 10px 20px 20px;
   position: relative;
 }
 #reviews-list li p {
@@ -276,4 +277,8 @@ nav h1 a {
 
 .clear {
   clear:both;
+}
+
+#breadcrumb-nav {
+  height: auto;
 }
